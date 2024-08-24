@@ -34,12 +34,14 @@ export const useImagesStore = defineStore('images', () => {
   })
   function updateCorrect(hiragana: Image) {
     correct.value.push(hiragana)
-    updateImages(hiragana)
   }
 
   function updateIncorrect(hiragana: Image) {
     incorrect.value.push(hiragana)
-    updateImages(hiragana)
+  }
+
+  function nextCard() {
+    updateImages(currentImage.value)
   }
   function updateImages(hiragana: Image) {
     const index = images.findIndex((image: Image) => image.character === hiragana.character)
@@ -64,6 +66,7 @@ export const useImagesStore = defineStore('images', () => {
     currentImage,
     images,
     setIncorrectAsImages,
+    nextCard,
     $reset
   }
 })

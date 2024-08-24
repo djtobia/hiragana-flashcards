@@ -20,9 +20,7 @@ import { shuffle } from '@/utility/shuffle'
 const props = defineProps({
   hiragana: {
     type: Object as PropType<Image>,
-    default: () => {
-      character: ''
-    }
+    required: true
   },
   incorrectAnswer: {
     type: String,
