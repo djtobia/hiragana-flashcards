@@ -40,5 +40,30 @@ export function instantiateImages(): Image[] {
     src: 'https://upload.wikimedia.org/wikipedia/commons/e/e9/Japanese_Hiragana_kyokashotai_GO.svg',
     character: 'go'
   }
-  return [ha, i, e, ko, ni, ho, n, go]
+
+  const wa: Image = {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Hiragana_letter_Wa.svg',
+    character: 'wa'
+  }
+
+  const ka: Image = {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/f/f0/Hiragana_letter_Ka.svg',
+    character: 'ka'
+  }
+
+  const ri: Image = {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Hiragana_letter_Ri.svg',
+    character: 'ri'
+  }
+
+  const ma: Image = {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Hiragana_letter_Ma.svg',
+    character: 'ma'
+  }
+
+  const su: Image = {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/2/24/Hiragana_letter_Su.svg',
+    character: 'su'
+  }
+  return [ha, i, e, ko, ni, ho, n, go, wa, ka, ri, ma, su]
 }
