@@ -1,13 +1,9 @@
 <template>
   <v-container class="justify-center">
     <v-row>
-      <v-col
-        v-for="(value, index) of createButtonValues()"
-        :key="value.answer"
-        cols="6"
-        :class="index === 0 ? 'text-end' : 'text-start'"
-      >
-        <v-btn @click="$emit(value.emit)">{{ value.answer }}</v-btn>
+      <v-col v-for="(value, index) of createButtonValues()" :key="value.answer" cols="6"
+        :class="index === 0 ? 'text-end' : 'text-start'">
+        <v-btn color="yellow" @click="$emit(value.emit)">{{ value.answer }}</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -16,6 +12,7 @@
 <script setup lang="ts">
 import { type PropType } from 'vue'
 import { type Image } from '@/models/image'
+import { type HiraganaButton } from '@/models/hiraganaButton'
 import { shuffle } from '@/utility/shuffle'
 const props = defineProps({
   hiragana: {
@@ -30,11 +27,11 @@ const props = defineProps({
 
 defineEmits(['correct', 'incorrect'])
 
-const createButtonValues = () => {
+const createButtonValues = (): HiraganaButton[] => {
   //return array of two objects, one with the correct answer one with the wrong, then shuffle them
-  const correct = { answer: props.hiragana.character, emit: 'correct' }
-  const incorrect = { answer: props.incorrectAnswer, emit: 'incorrect' }
-  const buttonValues = [correct, incorrect]
+  const correct: HiraganaButton = { answer: props.hiragana.character, emit: 'correct' }
+  const incorrect: HiraganaButton = { answer: props.incorrectAnswer, emit: 'incorrect' }
+  const buttonValues: HiraganaButton[] = [correct, incorrect]
   return shuffle(buttonValues)
 }
 </script>

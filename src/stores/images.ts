@@ -1,9 +1,10 @@
-import { ref, reactive, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { type Image, instantiateImages } from '@/models/image'
+import { type Image } from '@/models/image'
+import hiragana from '@/utility/hiragana'
 
 export const useImagesStore = defineStore('images', () => {
-  const images = reactive<Image[]>(instantiateImages())
+  const images = ref<Image[]>(hiragana())
   const correct = ref<Image[]>([])
   const incorrect = ref<Image[]>([])
   const currentImage = ref<Image>(getImage())
@@ -11,22 +12,20 @@ export const useImagesStore = defineStore('images', () => {
   const incorrectAnswers = computed(() => incorrect.value.length)
 
   function $reset() {
-    for (let i = 0; i < images.length; i++) {
-      images.pop()
-    }
-    images.push(...instantiateImages())
+
+    images.value = hiragana();
     correct.value = []
     incorrect.value = []
     currentImage.value = getImage()
   }
   function getImage() {
-    if (images.length > 0) return images[Math.floor(Math.random() * images.length)]
+    if (images.value.length > 0) return images.value[Math.floor(Math.random() * images.value.length)]
 
     return { character: '', src: '' }
   }
   const getIncorrectAnswer = computed(() => {
     const allAnswers = [
-      ...images.map((image) => image.character),
+      ...images.value.map((image) => image.character),
       ...correct.value.map((image) => image.character),
       ...incorrect.value.map((image) => image.character)
     ].filter((item) => item !== currentImage.value.character)
@@ -44,13 +43,13 @@ export const useImagesStore = defineStore('images', () => {
     updateImages(currentImage.value)
   }
   function updateImages(hiragana: Image) {
-    const index = images.findIndex((image: Image) => image.character === hiragana.character)
-    images.splice(index, 1)
+    const index = images.value.findIndex((image: Image) => image.character === hiragana.character)
+    images.value.splice(index, 1)
     currentImage.value = getImage()
   }
 
   function setIncorrectAsImages() {
-    images.push(...incorrect.value)
+    images.value.push(...incorrect.value)
     incorrect.value = []
     currentImage.value = getImage()
   }
