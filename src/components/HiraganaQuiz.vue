@@ -2,18 +2,22 @@
   <v-container fluid class="fill-height justify-center">
     <v-card width="500px">
       <v-card-title>Hiragana Quiz!</v-card-title>
-      <v-card-text class="mh-500">
+      <v-card-text>
         <v-img :src="hiragana.src" v-if="store.images.length" />
         <v-row v-else justify="center"><v-col class="text-center">You're done-zo</v-col></v-row>
         <v-row v-if="showCorrect" justify="center"
-          ><v-col cols="12" class="text-center">You got that one right!</v-col></v-row
+          ><v-col cols="12" class="text-center">You got that one right!</v-col>
+
+          <v-col cols="12" class="text-center"
+            >The answer was {{ hiragana.character }}</v-col
+          ></v-row
         >
         <v-row v-if="showIncorrect" justify="center">
           <v-col cols="12" class="text-center">
             You got that one wrong. The correct answer was {{ hiragana.character }}
           </v-col>
         </v-row>
-        <v-row v-if="showCorrect || showIncorrect" justify="center">
+        <v-row v-show="showCorrect || showIncorrect" justify="center">
           <v-col cols="12" class="text-center">
             <v-btn @click="nextCard">Next Card</v-btn>
           </v-col>
@@ -73,9 +77,3 @@ const nextCard = () => {
   store.nextCard()
 }
 </script>
-
-<style scoped>
-.mh-500 {
-  height: 550px;
-}
-</style>
