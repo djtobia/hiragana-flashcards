@@ -1,6 +1,6 @@
 <template>
   <v-app theme="dark" full-height>
-    <v-main>
+    <v-main color="black">
       <hiragana-quiz />
     </v-main>
   </v-app>
